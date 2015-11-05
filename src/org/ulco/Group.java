@@ -58,6 +58,21 @@ public class Group {
         return m_ID;
     }
 
+    public void move(Point delta) {
+        Group g = new Group();
+
+        for (Object o : m_objectList) {
+            GraphicsObject element = (GraphicsObject) (o);
+
+            element.move(delta);
+        }
+        for (Object o : m_groupList) {
+            Group element = (Group) (o);
+
+            element.move(delta);
+        }
+    }
+
     private int searchSeparator(String str) {
         int index = 0;
         int level = 0;

@@ -29,6 +29,12 @@ public class Point {
         return m_y;
     }
 
+    void move(Point delta)
+    {
+        m_x += delta.getX();
+        m_y += delta.getY();
+    }
+
     public String toJson() {
         return "{ type: point, x: " + m_x + ", y: " + this.m_y + " }";
     }

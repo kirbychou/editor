@@ -20,10 +20,14 @@ public class Circle extends GraphicsObject {
         return new Circle(m_center.copy(), m_radius);
     }
 
+    public Point getCenter() { return m_center; }
+
     public boolean isClosed(Point pt, double distance) {
         return Math.sqrt((m_center.getX() - pt.getX()) * (m_center.getX() - pt.getX()) +
                 ((m_center.getY() - pt.getY()) * (m_center.getY() - pt.getY()))) <= distance;
     }
+
+    void move(Point delta) { m_center.move(delta); }
 
     public String toJson() {
         return "{ type: circle, center: " + m_center.toJson() + ", radius: " + this.m_radius + " }";
