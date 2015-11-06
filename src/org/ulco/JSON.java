@@ -1,18 +1,27 @@
 package org.ulco;
 
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+
 public class JSON {
     static public GraphicsObject parse(String json) {
         GraphicsObject o = null;
         String str = json.replaceAll("\\s+", "");
         String type = str.substring(str.indexOf("type") + 5, str.indexOf(","));
 
-        if (type.compareTo("square") == 0) {
-            o = new Square(str);
-        } else if (type.compareTo("rectangle") == 0) {
-            o = new Rectangle(str);
-        } else if (type.compareTo("circle") == 0) {
-            o = new Circle(str);
+        // 1ere lettre en Majuscule
+        String type2 = type.replaceFirst(".", (type.charAt(0) + "").toUpperCase());
+
+        try {
+           Class c = Class.forName("org.ulco."+type2);
+           Constructor ct=  c.getConstructor(String.class);
+          Object ob=  ct.newInstance(str);
+            o = (GraphicsObject) ob;
+
+        }catch(Exception e){
+            e.printStackTrace();
         }
+
         return o;
     }
 
@@ -28,3 +37,5 @@ public class JSON {
         return new Document(json);
     }
 }
+// Object = Class.forname(org.ulco.circle).newIntance();
+//
