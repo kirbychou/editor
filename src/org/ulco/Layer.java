@@ -1,5 +1,6 @@
 package org.ulco;
 
+import java.util.Objects;
 import java.util.Vector;
 
 public class Layer {
@@ -26,7 +27,18 @@ public class Layer {
     }
 
     public int getObjectNumber() {
-        return m_list.size();
+        int size = 0;
+        for(Object o :m_list) {
+            if (o instanceof Group) {
+                size += ((Group) o).size();
+
+            } else {
+                size++;
+            }
+        }
+        return size;
+
+
     }
 
     public int getID() {
