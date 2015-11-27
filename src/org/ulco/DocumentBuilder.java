@@ -1,4 +1,4 @@
-package org.ulco.test;
+package org.ulco;
 
 import org.ulco.*;
 
