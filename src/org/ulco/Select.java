@@ -1,5 +1,8 @@
 package org.ulco;
 
+import java.util.Objects;
+import java.util.Vector;
+
 /**
  * Created by lcarpent on 24/11/15.
  */
@@ -22,5 +25,25 @@ public class Select {
             }
         }
         return liste;
+    }
+
+    public static void parseObjects(String objectsStr, Vector<GraphicsObject> m_list) {
+
+        while (!objectsStr.isEmpty()) {
+            int separatorIndex = SearchSeparator.searchSeparator(objectsStr);
+            String objectStr;
+
+            if (separatorIndex == -1) {
+                objectStr = objectsStr;
+            } else {
+                objectStr = objectsStr.substring(0, separatorIndex);
+            }
+            m_list.add(JSON.parse(objectStr));
+            if (separatorIndex == -1) {
+                objectsStr = "";
+            } else {
+                objectsStr = objectsStr.substring(separatorIndex + 1);
+            }
+        }
     }
 }
